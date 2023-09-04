@@ -1,7 +1,4 @@
 import json
-import os
-
-database_user = os.path.expanduser('~/account_transactions/operations.json')
 
 
 def open_json_file_r(database):
@@ -11,4 +8,12 @@ def open_json_file_r(database):
     return operations_data
 
 
-print(open_json_file_r(database_user))
+def mask_card_number(card_number):
+    """ Функция для маскирования номера карты"""
+    return f'XXXX XX** **** {card_number[-4:]}'
+
+
+#
+def mask_account_number(account_number):
+    """Функция для маскирования номера счета"""
+    return f'**{account_number[-4:]}'
