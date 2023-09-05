@@ -5,7 +5,7 @@ from utils.functions import open_json_file_r
 
 def test_json_file():
     # Укажите путь к вашему JSON-файлу
-    file_path = 'test_file.json'
+    file_path = 'file_test.json'
     # Ожидаемые данные
     expected_data = [{
         "key1": "value1",
