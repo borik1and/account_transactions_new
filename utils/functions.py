@@ -17,3 +17,10 @@ def mask_card_number(card_number):
 def mask_account_number(account_number):
     """Функция для маскирования номера счета"""
     return f'**{account_number[-4:]}'
+
+def convert_date(converting_date):
+    """функция преобразования даты из американского стандарта в стандарт ДД.ММ.ГГГГ"""
+    date_parts = converting_date.split('-')
+    formatted_date = '-'.join(date_parts[::-1])
+    return formatted_date
+
