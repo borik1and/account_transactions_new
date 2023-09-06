@@ -2,6 +2,7 @@ import os
 from utils.functions import mask_account_number
 from utils.functions import mask_card_number
 from utils.functions import open_json_file_r
+from utils.functions import convert_date
 
 database_user = os.path.expanduser('~/account_transactions/operations.json')
 operations_data = open_json_file_r(database_user)
@@ -22,6 +23,6 @@ for operation in latest_operations:
     amount = operation['operationAmount']['amount']
     currency = operation['operationAmount']['currency']['name']
 
-    formatted_operation = f"{date} {description}\n{from_account} -> {to_account}\n{amount} {currency}\n"
+    formatted_operation = f"{convert_date(date)} {description}\n{from_account} -> {to_account}\n{amount} {currency}\n"
 
     print(formatted_operation)
