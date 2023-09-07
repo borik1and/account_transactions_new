@@ -1,6 +1,8 @@
 import json
 import os
 
+database_user = os.path.expanduser('~/account_transactions/operations.json')
+
 
 def open_json_file_r(database):
     """Загрузка данных из файла operations.json"""
@@ -27,17 +29,14 @@ def convert_date(converting_date):
     return formatted_date
 
 
-def process_operations():
-    database_user = os.path.expanduser('~/account_transactions/operations.json')
-    operations_data = open_json_file_r(database_user)
-
-    # Фильтрация и сортировка операций
-    executed_operations = [operation for operation in operations_data if operation.get('state') == 'EXECUTED']
+def process_operations(data):
+    """Фильтрация и сортировка операций"""
+    executed_operations = [operation for operation in data if operation.get('state') == 'EXECUTED']
     sorted_operations = sorted(executed_operations, key=lambda x: x['date'], reverse=True)
-
-    # Выбор последних 5 операций
+    """Выбор последних 5 операций"""
     latest_operations = sorted_operations[:5]
-
+    """создание списка последних 5 операций"""
+    formatted_operations = []
     for operation in latest_operations:
         date = operation['date'].split('T')[0]
         description = operation['description']
@@ -47,4 +46,6 @@ def process_operations():
         currency = operation['operationAmount']['currency']['name']
         formatted_operation = (f"{convert_date(date)} {description}\n"
                                f"{from_account} -> {to_account}\n{amount} {currency}\n")
-        print(formatted_operation)
+        formatted_operations.append(formatted_operation)
+
+    return formatted_operations
